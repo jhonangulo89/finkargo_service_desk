@@ -1,3 +1,9 @@
+const Rules = {
+  OFF: 'off',
+  WARN: 'warn',
+  ERROR: 'error'
+}
+
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
@@ -5,14 +11,17 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'prettier',
+    'plugin:prettier/recommended'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'prettier'],
   rules: {
+    'prettier/prettier': Rules.ERROR,
     'react-refresh/only-export-components': [
       'warn',
-      { allowConstantExport: true },
-    ],
-  },
+      { allowConstantExport: true }
+    ]
+  }
 }

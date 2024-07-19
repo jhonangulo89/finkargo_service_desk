@@ -11,6 +11,8 @@ python = "^3.12"
 fastapi = "^0.111.1"
 uvicorn = {extras = ["standard"], version = "^0.30.1"}
 pylint = "^3.2.5"
+sqlalchemy = "^2.0.31"
+databases = {extras = ["asyncpg"], version = "^0.9.0"}
 
 
 [build-system]
