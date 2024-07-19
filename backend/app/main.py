@@ -1,32 +1,19 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from app.middlewares.error_handler import ErrorHandler
-from databases import Database
-from sqlalchemy import create_engine, MetaData
+from app.routers.user import user_router
+# from schemas.models import HealthResponse
 
-DATABASE_URL = "postgresql://postgres:postgres@db:5432/mydatabase"
-
-database = Database(DATABASE_URL)
-metadata = MetaData()
+# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-app.title = "Api test"
+app.title = "Api FK_Service_Desk"
 app.version = "1.0.0"
 
 app.add_middleware(ErrorHandler)
+app.include_router(user_router)
 
-@app.on_event("startup")
-async def startup():
-    await database.connect()
+# @app.get("/", response_model=HealthResponse)
+# async def health():
+#     return HealthResponse(status="Ok")
 
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
-
-@app.get("/", tags=["Home"])
-async def message():
-    return HTMLResponse('<h1>¡Bienvenido Jhon Manuel fff!</h1>')
-
-@app.get("/error")
-def trigger_error():
-    raise HTTPException(status_code=404, detail="Not Found")
