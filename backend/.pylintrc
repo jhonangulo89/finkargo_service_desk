@@ -1,0 +1,48 @@
+[MASTER]
+# Directorios o archivos a omitir
+ignore=tests,docs
+
+# Establece el nivel mínimo de mensaje de error que se mostrará
+# Valores posibles: (CRITICAL, ERROR, WARNING, INFO, DEBUG)
+log-level=INFO
+
+[MESSAGES CONTROL]
+# Desactiva algunos tipos de mensajes
+disable=C0111, C0103, W0613, R0201
+
+[REPORTS]
+# Desactiva el informe de puntuación de código
+output-format=text
+reports=no
+
+[FORMAT]
+# Longitud máxima de una línea
+max-line-length=88
+
+# Número de espacios para identación
+indent-string='    '
+
+[VARIABLES]
+# Longitud máxima del nombre de la variable
+max-name-length=30
+
+# Longitud máxima del nombre de las constantes
+max-constant-name-length=30
+
+[DESIGN]
+# Número máximo de argumentos en una función
+max-args=5
+
+# Número máximo de atributos en una clase
+max-attributes=10
+
+# Número máximo de métodos en una clase
+max-methods=20
+
+[IMPORTS]
+# Espacio mínimo entre las importaciones de diferentes módulos
+# (Puede ajustarse si se requiere un espacio mayor entre importaciones)
+min-import-space=1
+
+# Establece un espacio para la lista de módulos ignorados
+ignored-modules=pylint, ast, importlib
