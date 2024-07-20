@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "backend"
-version = "0.1.0"
-description = "proyect test"
+name = "agile_ticket_tracker"
+version = "0.2.0"
+description = "sistema de gestión de tickets"
 authors = ["JhonAngulo <jhonmanuelm89@gmail.com>"]
 license = "MIT"
 readme = "README.md"
