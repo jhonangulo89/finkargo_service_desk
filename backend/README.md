@@ -37,7 +37,7 @@ poetry install
 To run the application, use the following command:
 
 ```sh
-uvicorn app.main:app --reload
+poetry run uvicorn app.main:app --reload
 ```
 
 export PYTHONPATH=$(pwd)/app

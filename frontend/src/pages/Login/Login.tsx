@@ -1,8 +1,9 @@
 import React from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, get } from 'react-hook-form'
 import { TextField, Button, Container, Typography, Box } from '@mui/material'
 import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { postAuth } from '../../services/auth'
 
 interface IFormInput {
   email: string
@@ -19,10 +20,12 @@ const Login: React.FC = () => {
   const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    // Aquí puedes agregar la lógica de autenticación real
-    console.log(data)
-    login()
-    navigate('/')
+    postAuth({ path: 'login', data }).then((response) => {
+      if (response.status === 200) {
+        login()
+        navigate('/')
+      }
+    })
   }
 
   return (
