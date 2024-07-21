@@ -1,6 +1,7 @@
 from app.models.project import Project as ProjectModel
-from app.schemas.project import ProjectCreate, ProjectUpdate
+from app.schemas.project import ProjectCreate, ProjectUpdate, ProjectOut
 from uuid import UUID
+
 
 class ProjectService():
     def __init__(self, db) -> None:
@@ -8,7 +9,8 @@ class ProjectService():
 
     def get_projects(self):
         result = self.db.query(ProjectModel).all()
-        return result
+        projects_data = [ProjectOut.model_validate(project) for project in result]
+        return projects_data
 
     def get_project(self, id: UUID):
         result = self.db.query(ProjectModel).filter(ProjectModel.project_id == id).first()

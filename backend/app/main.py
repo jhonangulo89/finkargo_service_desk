@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from app.middlewares.error_handler import ErrorHandler
 from app.routers.user import user_router
-from app.routers.issue import issue_router
+from app.routers.ticket import ticket_router
 from app.routers.project import project_router
 
 # Configurar CORS
@@ -27,7 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(user_router)
-app.include_router(issue_router)
+app.include_router(ticket_router)
 app.include_router(project_router)
 
 @app.get("/health", tags=["Health_Check"], response_class=JSONResponse)

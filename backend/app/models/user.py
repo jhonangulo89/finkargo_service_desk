@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String, DateTime, Boolean, func
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from app.config.database import Base
 
 class User(Base):
@@ -17,3 +18,5 @@ class User(Base):
     last_login = Column(DateTime)
     profile_picture = Column(String(255))
 
+    # Relación uno a muchos con Ticket
+    tickets = relationship("Ticket", back_populates="user")

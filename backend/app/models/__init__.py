@@ -1,6 +1,6 @@
 from .user import User
 from .project import Project
-from .issue import Issue
+from .ticket import Ticket
 from app.config.database import Base, engine
 
 # Importar y registrar todos los modelos

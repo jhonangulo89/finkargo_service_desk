@@ -4,8 +4,8 @@ from app.config.database import Base
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
-class Issue(Base):
-    __tablename__ = "issues"
+class Ticket(Base):
+    __tablename__ = "tickets"
 
     issue_id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
     title = Column(String(255), nullable=False)
@@ -18,6 +18,7 @@ class Issue(Base):
     user_id = Column(UUID(as_uuid=True), ForeignKey('users.user_id'))
     project_id = Column(UUID(as_uuid=True), ForeignKey('projects.project_id'))
 
-    user = relationship("User")
-    project = relationship("Project")
+    # Relaciones
+    user = relationship("User", back_populates="tickets")
+    project = relationship("Project", back_populates="tickets")
 
