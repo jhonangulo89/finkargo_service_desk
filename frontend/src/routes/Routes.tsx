@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { AuthProvider } from '../context/AuthContext'
-import ProtectedRoute from '../routes/ProtectedRoute'
-import Login from '../pages/Login'
-import Home from '../pages/Home'
-import MainLayout from '../layout/MainLayout'
-import Tickets from '../pages/Tickets'
-import Projects from '../pages/Projects'
+import { AuthProvider } from '@context/AuthContext'
+import ProtectedRoute from '@routes/ProtectedRoute'
+import Login from '@pages/Login'
+import Dashboard from '@pages/Dashboard'
+import MainLayout from '@layout/MainLayout'
+import Tickets from '@pages/Tickets'
+import Projects from '@pages/Projects'
 
 const AppRoutes: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ const AppRoutes: React.FC = () => {
               </ProtectedRoute>
             }
           >
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/projects" element={<Projects />} />
           </Route>

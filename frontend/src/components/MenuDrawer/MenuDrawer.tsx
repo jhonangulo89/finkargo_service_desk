@@ -4,61 +4,26 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Toolbar
+  Toolbar,
+  Typography
 } from '@mui/material'
 import { alpha, useTheme } from '@mui/material/styles'
-import {
-  Home,
-  Analytics,
-  AccountTree,
-  SpaceDashboard,
-  BugReport
-} from '@mui/icons-material'
 import { Link, useLocation } from 'react-router-dom'
+import menuItems from '@utils/menuList'
+import attLogo from '@assets/logo.svg'
 
 const MenuDrawer = () => {
   const theme = useTheme()
   const location = useLocation()
-  const menuItems = [
-    {
-      id: '1',
-      option: 'Dashboard',
-      displayName: 'Dashboard',
-      icon: Home,
-      path: '/'
-    },
-    {
-      id: '2',
-      option: 'Tickets',
-      displayName: 'Tickets',
-      icon: BugReport,
-      path: '/tickets'
-    },
-    {
-      id: '3',
-      option: 'Projects',
-      displayName: 'Projects',
-      icon: AccountTree,
-      path: '/projects'
-    },
-    {
-      id: '4',
-      option: 'Kanban',
-      displayName: 'Kanban',
-      icon: SpaceDashboard,
-      path: '/kanban'
-    },
-    {
-      id: '5',
-      option: 'Analítica',
-      displayName: 'Analítica',
-      icon: Analytics,
-      path: '/analytics'
-    }
-  ]
+
   return (
     <div>
-      <Toolbar />
+      <Toolbar>
+        <img src={attLogo} className="logo react" alt="React logo" />
+        <Typography variant="h6" noWrap component="div" color="secondary">
+          gile Ticket Traker
+        </Typography>
+      </Toolbar>
       <List
         sx={{
           p: 2

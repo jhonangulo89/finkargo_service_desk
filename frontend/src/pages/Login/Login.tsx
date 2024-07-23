@@ -1,10 +1,10 @@
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { TextField, Button, Typography, Box, Grid, Stack } from '@mui/material'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '@context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { postAuth } from '../../services/auth'
-import theme from '../../theme/theme'
+import { postAuth } from '@services/auth'
+import theme from '@theme/theme'
 
 interface IFormInput {
   email: string

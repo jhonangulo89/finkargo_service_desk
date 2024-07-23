@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import MaterialUITable from '../../components/MaterialUITable'
+import MaterialUITable from '@components/MaterialUITable'
 import { Column } from 'react-table'
-import { getTickets } from '../../services/tickets'
+import { getTickets } from '@services/tickets'
+import PageTitle from '@components/PageTitle'
 
 interface Ticket {
   title: string
@@ -75,9 +76,7 @@ const Tickets = () => {
 
   return (
     <>
-      <div>Tickets</div>
-      <br />
-      <br />
+      <PageTitle />
       <MaterialUITable columns={columns} data={tickets} />
     </>
   )

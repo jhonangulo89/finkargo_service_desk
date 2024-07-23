@@ -30,7 +30,34 @@ app.include_router(user_router)
 app.include_router(ticket_router)
 app.include_router(project_router)
 
-@app.get("/health", tags=["Health_Check"], response_class=JSONResponse)
+@app.get("/healthcheck", tags=["Health_Check"], response_class=JSONResponse)
 async def health_check():
     return {"status": "ok"}
 
+# test
+
+# from fastapi import FastAPI
+# import importlib
+# import pkgutil
+# from pathlib import Path
+# from app.routers.v1 import __name__ as router_package
+
+# app = FastAPI()
+
+# # Prefijo de la versión
+# version_prefix = "/v1"
+
+# # Ruta a la carpeta de routers de la versión 1
+# routers_path = Path(__file__).parent / "routers" / "v1"
+
+# # Cargar todos los routers automáticamente
+# for module_info in pkgutil.iter_modules([str(routers_path)]):
+#     if not module_info.ispkg:
+#         module_name = f"{router_package}.{module_info.name}"
+#         module = importlib.import_module(module_name)
+#         if hasattr(module, "router"):
+#             app.include_router(module.router, prefix=version_prefix)
+
+# @app.get("/")
+# async def root():
+#     return {"message": "Hello World"}

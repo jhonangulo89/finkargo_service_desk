@@ -1,4 +1,4 @@
-import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
+import { AppBar, IconButton, Toolbar } from '@mui/material'
 import { Menu as MenuIcon } from '@mui/icons-material'
 
 interface NavbarProps {
@@ -30,9 +30,6 @@ const Navbar = ({ drawerWidth, handleDrawerToggle }: NavbarProps) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div">
-          Agile Ticket Traker
-        </Typography>
       </Toolbar>
     </AppBar>
   )

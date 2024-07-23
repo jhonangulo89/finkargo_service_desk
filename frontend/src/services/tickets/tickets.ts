@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios'
-import apiInstance from '../instance'
+import apiInstance from '@services/instance'
 
 interface GetTickets {
   path: string

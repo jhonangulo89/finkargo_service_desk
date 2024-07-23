@@ -1,11 +1,8 @@
-import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
-import Drawer from '@mui/material/Drawer'
-import Toolbar from '@mui/material/Toolbar'
+import { Drawer, Toolbar, Box, CssBaseline } from '@mui/material'
 import { Outlet } from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import Navbar from '@components/Navbar'
 import { useState } from 'react'
-import MenuDrawer from '../components/MenuDrawer'
+import MenuDrawer from '@components/MenuDrawer'
 
 const drawerWidth = 260
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import MaterialUITable from '../../components/MaterialUITable'
+import MaterialUITable from '@components/MaterialUITable'
 import { Column } from 'react-table'
-import { getProjects } from '../../services/projects'
+import { getProjects } from '@services/projects'
+import PageTitle from '@components/PageTitle'
 
 interface Project {
   projectId: string
@@ -39,9 +40,7 @@ const Projects = () => {
 
   return (
     <>
-      <div>Projects</div>
-      <br />
-      <br />
+      <PageTitle />
       <MaterialUITable columns={columns} data={projects} />
     </>
   )
