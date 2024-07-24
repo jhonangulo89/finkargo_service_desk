@@ -1,93 +1,122 @@
-import { useTable, Column } from 'react-table'
+import Box from '@mui/material/Box'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+// import TablePagination from '@mui/material/TablePagination'
 import Paper from '@mui/material/Paper'
-import { alpha, styled, useTheme } from '@mui/material/styles'
-
-// Estilización personalizada de las celdas con ancho ajustado
-const StyledTableCell = styled(TableCell)(() => ({
-  fontSize: '14px', // Tamaño de fuente más pequeño
-  padding: '8px', // Espaciado interno más pequeño
-  whiteSpace: 'nowrap', // Evitar el ajuste de texto
-  overflow: 'hidden', // Ocultar texto desbordante
-  textOverflow: 'ellipsis' // Mostrar puntos suspensivos para texto largo
-}))
-
-// Estilización personalizada de las filas con color de fondo en hover
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
-    backgroundColor: alpha(theme.palette.grey[200], 0.8) // Co
-  },
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.2) // Color de fondo al pasar el cursor sobre la fila
-  },
-  '&:last-child td, &:last-child th': {
-    border: 0 // Sin borde en la última fila
-  }
-}))
+import {
+  // Column,
+  // Table as ReactTable,
+  useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  ColumnDef,
+  flexRender
+} from '@tanstack/react-table'
+import { alpha, useTheme } from '@mui/material/styles'
 
 interface TableProps<T extends object> {
-  columns: Column<T>[]
+  columns: ColumnDef<T>[]
   data: T[]
 }
 
 const MaterialUITable = <T extends object>({
-  columns,
-  data
+  data,
+  columns
 }: TableProps<T>) => {
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable<T>({ columns, data })
   const theme = useTheme()
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    debugTable: false
+  })
+
+  // const { pageSize, pageIndex } = table.getState().pagination
 
   return (
-    <TableContainer
-      component={Paper}
-      sx={{
-        width: '100%',
-        maxHeight: '500px',
-        minHeight: '600px',
-        overflow: 'auto'
-      }}
-    >
-      <Table {...getTableProps()} stickyHeader>
-        <TableHead
-          sx={{
-            '.MuiTableCell-root': {
-              backgroundColor: theme.palette.secondary.main,
-              color: theme.palette.common.white
-            }
-          }}
-        >
-          {headerGroups.map((headerGroup) => (
-            <StyledTableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <StyledTableCell {...column.getHeaderProps()}>
-                  {column.render('Header')}
-                </StyledTableCell>
-              ))}
-            </StyledTableRow>
-          ))}
-        </TableHead>
-        <TableBody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row)
-            return (
-              <StyledTableRow {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <StyledTableCell {...cell.getCellProps()}>
-                    {cell.render('Cell')}
-                  </StyledTableCell>
-                ))}
-              </StyledTableRow>
-            )
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Box sx={{ width: '100%' }}>
+      <TableContainer component={Paper} elevation={0}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" size="small">
+          <TableHead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableCell key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder ? null : (
+                        <div>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </div>
+                      )}
+                    </TableCell>
+                  )
+                })}
+              </TableRow>
+            ))}
+          </TableHead>
+          <TableBody>
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <TableRow
+                  key={row.id}
+                  sx={{
+                    '&:nth-of-type(odd)': {
+                      backgroundColor: alpha(theme.palette.grey[100], 0.8)
+                    },
+                    '&:hover': {
+                      backgroundColor: alpha(theme.palette.primary.main, 0.2)
+                    }
+                  }}
+                >
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    )
+                  })}
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {/* <TablePagination
+        rowsPerPageOptions={[5, 10, 25, { label: 'All', value: data.length }]}
+        component="div"
+        count={table.getFilteredRowModel().rows.length}
+        rowsPerPage={pageSize}
+        page={pageIndex}
+        slotProps={{
+          select: {
+            inputProps: { 'aria-label': 'rows per page' },
+            native: true
+          }
+        }}
+        onPageChange={(_, page) => {
+          table.setPageIndex(page)
+        }}
+        onRowsPerPageChange={(e) => {
+          const size = e.target.value ? Number(e.target.value) : 10
+          table.setPageSize(size)
+        }}
+        ActionsComponent={TablePaginationActions}
+      />
+      <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
+    </Box>
   )
 }
 

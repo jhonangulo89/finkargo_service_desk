@@ -1,22 +1,31 @@
-import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { TextField, Button, Typography, Box, Grid, Stack } from '@mui/material'
 import { useAuth } from '@context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { postAuth } from '@services/auth'
 import theme from '@theme/theme'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import validationInputs from '@utils/validationInputs'
 
 interface IFormInput {
   email: string
   password: string
 }
 
-const Login: React.FC = () => {
+const schema = yup.object().shape({
+  email: validationInputs.email,
+  password: validationInputs.password
+})
+
+const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<IFormInput>()
+  } = useForm<IFormInput>({
+    resolver: yupResolver(schema)
+  })
   const { login } = useAuth()
   const navigate = useNavigate()
 
@@ -67,7 +76,7 @@ const Login: React.FC = () => {
               variant="outlined"
               fullWidth
               margin="normal"
-              {...register('email', { required: 'Email is required' })}
+              {...register('email')}
               error={!!errors.email}
               helperText={errors.email ? errors.email.message : ''}
             />
@@ -79,7 +88,7 @@ const Login: React.FC = () => {
               variant="outlined"
               fullWidth
               margin="normal"
-              {...register('password', { required: 'Password is required' })}
+              {...register('password')}
               error={!!errors.password}
               helperText={errors.password ? errors.password.message : ''}
             />

@@ -15,7 +15,7 @@ origins = [
 
 
 app = FastAPI()
-app.title = "Api FK_Service_Desk"
+app.title = "Api - Agile Ticket Traker"
 app.version = "1.0.0"
 
 app.add_middleware(ErrorHandler)

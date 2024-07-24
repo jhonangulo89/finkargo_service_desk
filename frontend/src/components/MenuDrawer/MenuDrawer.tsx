@@ -20,7 +20,7 @@ const MenuDrawer = () => {
     <div>
       <Toolbar>
         <img src={attLogo} className="logo react" alt="React logo" />
-        <Typography variant="h6" noWrap component="div" color="secondary">
+        <Typography variant="h5" noWrap component="div" color="secondary">
           gile Ticket Traker
         </Typography>
       </Toolbar>

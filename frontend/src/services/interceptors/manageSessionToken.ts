@@ -6,8 +6,8 @@ const manageSessionToken = (instance: AxiosInstance) => {
       if (response?.config?.url === '/auth/login' && response.status === 200) {
         console.log('Login success')
         if (
-          response?.data?.token === undefined ||
-          response?.data?.refreshToken === undefined
+          response?.data?.token !== undefined &&
+          response?.data?.refreshToken !== undefined
         ) {
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('refreshToken', response.data.refreshToken)

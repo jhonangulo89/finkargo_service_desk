@@ -4,7 +4,7 @@ import Navbar from '@components/Navbar'
 import { useState } from 'react'
 import MenuDrawer from '@components/MenuDrawer'
 
-const drawerWidth = 260
+const drawerWidth = 220
 
 interface MainLayoutProps {
   window?: () => Window
